@@ -68,13 +68,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
       else
         flash[:alert] = "アカウント情報を変更できませんでした"
       end
+      sign_in(current_user, bypass: true)
+      redirect_to users_account_path
     end
 
-    private
-
-    def after_update_path_for(resource)
-      users_account_path(current_user)
-    end
+    protected
   
     def current_user_params
       params.require(:user).permit(:email, :password)
