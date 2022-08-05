@@ -1,0 +1,43 @@
+<div class="container-fiuld user"> 
+  <div class="row">
+
+    <div class="col-md-12 user-view">
+      <div class="user-view-box">
+
+        <div class="update-content">
+          <div class="row">
+            <label class="col-md-3" for="room">予約した部屋</label>
+            <div class="col-md-9">
+              <%= link_to room_path(@reservation.room_id) do %>
+                <%= @reservation.room.room_title %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="update-content">
+          <div class="row">
+            <label class="col-md-3" for="start_at">開始日</label>
+            <div class="col-md-9"><%= @reservation.start_at %></div>
+          </div>
+        </div>
+
+        <div class="update-content">
+          <div class="row">
+            <label class="col-md-3" for="end_at">終了日</label>
+            <div class="col-md-9"><%= @reservation.end_at %></div>
+          </div>
+        </div>
+
+        <div class="update-content">
+          <div class="row">
+            <label class="col-md-3" for="price">価格</label>
+            <div class="col-md-9"><%= @reservation.room.price.to_i * @reservation.people.to_i * (@reservation.end_at - @reservation.start_at).to_i %>円</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

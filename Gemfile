@@ -70,3 +70,18 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+# Webpacker
+gem "webpacker"
+
+# Bulma
+gem 'bulma-rails'
+gem 'bulma-extensions-rails'
+
+#デバイス
+gem 'devise'
+
+# 日本語化
+gem 'rails-i18n'
+
+gem 'pry-rails'

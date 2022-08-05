@@ -1,0 +1,63 @@
+<header class="header">
+  <div class="header-inner">
+    <!-- header-left-navはロゴから検索まで -->
+    <div class="header-left-nav">
+      <%= link_to image_tag('logo.png'), '/' %>
+      
+      <%= form_with url: result_path, method: :get do |f| %>
+        <div class="header-search d-lg-inline-block d-none">
+          <%= f.search_field :address, class: "form-control", placeholder: "エリア" %>
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+      <% end %>
+
+      <%= form_with url: search_path, method: :get do |f| %>
+        <div class="header-search d-lg-inline-block d-none">
+          <%= f.search_field :search, class: "form-control", placeholder: "キーワード" %>
+          <i class="fas fa-search"></i>
+        </div>
+      <% end %>
+
+        <!-- div class="d-none" -->
+          <!--submit data:{disable_with:"false"}いれる -->
+        <!-- div -->
+
+    </div>
+    
+    <div class="header-right-nav">
+      <!-- もしログインしていたら-->
+      <% if (user_signed_in?) %>
+        <div class="nav-item d-sm-inline-block d-none">
+          <%= current_user.user_name %>
+        </div>
+        <div class="nav-item">
+          <%= image_tag user_image_url(current_user), class: "mx-3 p-1 host-icon nav-trigger" %>
+          <ul class="header-nav-menu">
+            <li><%= link_to  "ルーム登録", new_room_path %></li>
+            <li><%= link_to  "予約済みルーム一覧", reservations_path %></li>
+            <li><%= link_to  "登録済みルーム一覧", rooms_path %></li>
+            <li><%= link_to  "設定", users_account_path %></li>
+            <li><%= link_to  "ログアウト", destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </div>
+        <!-- ログインしていなければ -->
+        <% else %>
+          <div class="nav-item">
+            <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary my-2 mx-3" %>
+            <%= link_to "登録する", new_user_registration_path, class: "btn btn-secondary" %>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</header>
+
+<div class="clearfix">
+</div>
+
+<script>
+  $(function() {
+    $('.nav-trigger').click(function() {
+          $('.header-nav-menu').toggle();
+      })
+  });
+</script>

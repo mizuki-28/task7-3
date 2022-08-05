@@ -1,0 +1,67 @@
+<%= stylesheet_link_tag "rooms" %>
+
+<div class="container-field reservations">
+
+  <h4 class="pb-4">予約済みルーム一覧</h4>
+
+  <table>
+
+    <thead>
+      <tr align="center">
+        <th>ルーム画像</th>
+        <th>ルーム名</th>
+        <th>ルーム紹介</th>
+        <th>合計金額</th>
+        <th>開始日</th>
+        <th>終了日</th>
+        <th>予約確定日時</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <% if @reservations.blank? %>
+        <tr>
+          <td colspan="7"><h1>表示できるご予約はありません。</h1></td>
+        </tr>
+      <% end %>
+
+      <% @reservations.each do |reservation| %>
+        <tr>
+          <td>
+            <%= link_to room_path(reservation.room.id) do %>
+              <% if reservation.room.room_image.attached? %>
+                <%= image_tag reservation.room.room_image, class: "reservations-image" %>
+              <% else %>
+                <%= image_tag "no_image.jpg", class: "room-posts-image" %>
+              <% end %>
+            <% end %>
+          </td>
+          <td class="posts-name">
+            <%= link_to room_path(reservation.room.id) do %>
+            <%= reservation.room.room_title %>
+            <% end %>
+          </td>
+          <td class="posts-content">
+            <%= reservation.room.room_body %>
+          </td>
+          <td class="price-icon">
+            <%= reservation.room.price.to_i * reservation.people.to_i * (reservation.end_at - reservation.start_at).to_i %>
+          </td>
+          <td>
+            <%= reservation.start_at %>
+          </td>
+          <td>
+            <%= reservation.end_at %>
+          </td>
+          <td>
+            <%= reservation.created_at %>
+          </td>
+        </tr>
+      <% end %>
+
+    </tbody>
+
+  </table>
+
+</div>
